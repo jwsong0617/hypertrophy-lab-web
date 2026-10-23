@@ -19,6 +19,7 @@ function ProfileForm({ profile }: { profile: Profile }) {
       increment: Number(form.get('increment')), goal: form.get('goal'), equipment: form.get('equipment'),
       clearance: form.get('clearance') === 'on' ? 'confirmed' : 'unknown',
       programStyle: profile.programStyle ?? 'supported', includeCalves: profile.includeCalves ?? false, includeHipThrust: profile.includeHipThrust ?? false,
+      customPlans: profile.customPlans, recordBindings: profile.recordBindings,
     });
     if (!result.success) return notify('프로필의 입력 범위와 날짜를 확인해 주세요.');
     update(previous => ({ ...previous, profile: result.data })); notify('프로필을 이 기기에 저장했습니다.');

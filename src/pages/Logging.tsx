@@ -49,7 +49,7 @@ export function Log({ requestedSlot }: { requestedSlot: string | null }) {
     const startedAt = date === koreaDay() ? now.toISOString() : new Date(`${date}T12:00:00+09:00`).toISOString();
     const session: Session = { id: `log:${sourceId}`, source: 'log', sourceId, date, startedAt, name: `${slot.name} · ${week}주`, duration: duration === '' ? null : Number(duration) * 60, notes, sets, slot: slot.id };
     update(previous => ({ ...previous, sessions: [...previous.sessions, session], nextSlot: sets.some(set => set.kind === 'work') ? previous.nextSlot + ((slotIndex - previous.nextSlot % plan.length + plan.length) % plan.length) + 1 : previous.nextSlot, checkIns: pain !== '' || fatigue !== '' || sleep !== '' ? [...previous.checkIns.filter(item => item.date !== date), readinessEntry()] : previous.checkIns }));
-    setMode('personal'); notify(`${sets.filter(set => set.kind === 'work').length}개 본세트를 기록했습니다. 오늘도 수고했어요.`); navigate('overview');
+    setMode('personal'); notify(`${sets.filter(set => set.kind === 'work').length}개 본세트를 기록했습니다. 오늘도 수고했어요.`); navigate('program');
   };
   if (mode === 'demo') return <><PageHeading eyebrow="LOG YOUR TRAINING" title="이제 나의 기록을 시작해요" description="예시 기록은 개인 기록에 섞이지 않습니다."/><Card><Notice>이 화면에서 입력하는 내용은 실제 개인 기록으로 저장됩니다. 예시 모드에서 나와 시작하세요.</Notice><button className="button dark" onClick={() => setMode('personal')}>내 운동 기록 시작<ArrowRight size={16}/></button></Card></>;
   return <><PageHeading eyebrow="LOG YOUR TRAINING" title="지금, 이 세트에 집중하기" description={`${week}주 · ${phase(week).name} · 빈 세트와 미입력 RIR는 저장할 때 채우지 않습니다.`}/>

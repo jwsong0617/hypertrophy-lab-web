@@ -2,6 +2,7 @@ import { openDB } from 'idb';
 import { z } from 'zod';
 import { koreaDay, validDay } from './time.ts';
 import type { AppData } from './types.ts';
+import { getExercise } from './exercises.ts';
 
 const nullable = (max: number) => z.number().finite().min(0).max(max).nullable();
 const day = z.string().refine(validDay, '유효하지 않은 날짜');
@@ -11,12 +12,20 @@ const setSchema = z.object({
   order: z.string().max(100), kind: z.enum(['work', 'warmup', 'drop', 'rest', 'cardio', 'timed', 'unknown']),
   weight: nullable(1500), reps: nullable(2000).refine(v => v === null || Number.isInteger(v)), rpe: nullable(10), rir: nullable(10), distance: nullable(1_000_000), seconds: nullable(86400), notes: text,
 });
+const exerciseId = z.string().max(100).refine(id => { const exercise = getExercise(id); return !!exercise && !['cardio', 'timed'].includes(exercise.load); }, '반복수로 계획할 수 있는 종목을 선택하세요.');
+export const plannedExerciseSchema = z.object({
+  exerciseId, sets: z.number().int().min(1).max(6), reps: z.tuple([z.number().int().min(3).max(30), z.number().int().min(3).max(30)]).refine(([low, high]) => low <= high),
+  rir: z.number().int().min(2).max(5), rest: z.number().int().min(60).max(300),
+});
+export const slotPlanSchema = z.array(plannedExerciseSchema).min(1).max(12).refine(rows => new Set(rows.map(row => row.exerciseId)).size === rows.length, '같은 슬롯에 종목을 중복하지 마세요.');
 export const profileSchema = z.object({
   weight: nullable(400).refine(v => v === null || v >= 20), height: nullable(250).refine(v => v === null || v >= 80),
   waist: nullable(250).refine(v => v === null || v >= 30), days: z.union([z.literal(2), z.literal(3), z.literal(4)]),
   minutes: z.union([z.literal(30), z.literal(60)]), startDate: day, increment: z.number().min(0.1).max(10),
   goal: z.enum(['grow', 'maintain', 'recompose']), clearance: z.enum(['unknown', 'confirmed']), equipment: z.enum(['gym', 'home']),
   programStyle: z.enum(['supported', 'barbell']).optional(), includeCalves: z.boolean().optional(), includeHipThrust: z.boolean().optional(),
+  customPlans: z.record(z.string().regex(/^(gym|home):(supported|barbell):[234]:(30|60):[01]:[01]:(A|B|C|U1|U2|L1|L2)$/), slotPlanSchema).refine(value => Object.keys(value).length <= 100).optional(),
+  recordBindings: z.record(exerciseId, z.string().trim().min(1).max(200)).optional(),
 });
 const auditSchema = z.object({
   totalRows: z.number().int().min(0), acceptedRows: z.number().int().min(0), rejectedRows: z.number().int().min(0), duplicateRows: z.number().int().min(0),
@@ -37,6 +46,7 @@ export const backupSchema: z.ZodType<AppData> = z.object({
   })).max(50_000).refine(items => new Set(items.map(item => item.id)).size === items.length, '운동 ID 중복'),
   checkIns: z.array(checkInSchema).max(50_000).refine(items => new Set(items.map(item => item.date)).size === items.length, '체크인 날짜 중복'),
   profile: profileSchema, nextSlot: z.number().int().min(0).max(1_000_000), importedAt: z.string().datetime().nullable(), lastAudit: auditSchema.nullable(),
+  reviews: z.array(z.object({ week: day, action: z.enum(['keep', 'reduce', 'change']), note: z.string().max(2000), recordedAt: z.string().datetime() })).max(1000).refine(items => new Set(items.map(item => item.week)).size === items.length, '주간 검토 날짜 중복').optional(),
 });
 export function emptyData(today = koreaDay()): AppData {
   return { schemaVersion: 1, sessions: [], checkIns: [], profile: { weight: null, height: null, waist: null, days: 3, minutes: 60, startDate: today, increment: 1, goal: 'grow', clearance: 'unknown', equipment: 'gym', programStyle: 'supported', includeCalves: false, includeHipThrust: false }, nextSlot: 0, importedAt: null, lastAudit: null };

@@ -27,7 +27,10 @@ export function phase(week: number) {
   if (week === 8 || week === 12 || week === 16 || week === 24) return { name: '평가와 조정', description: '수행·회복·일정을 점검합니다. 피로가 누적되면 세트를 절반으로 줄입니다.', sets: 2, rir: 3 };
   return { name: '점진적 성장', description: '반복수를 먼저 늘리고, 기록 조건을 만족하면 소폭 증량합니다.', sets: 3, rir: 2 };
 }
-export function buildPlan(profile: Profile, week: number): PlanSlot[] {
+export function planKey(profile: Profile, slot: string): string {
+  return `${profile.equipment}:${profile.equipment === 'home' ? 'supported' : profile.programStyle ?? 'supported'}:${profile.days}:${profile.minutes}:${profile.includeCalves ? 1 : 0}:${profile.includeHipThrust ? 1 : 0}:${slot}`;
+}
+export function buildBasePlan(profile: Profile, week: number): PlanSlot[] {
   const p = phase(week);
   const barbell = profile.programStyle === 'barbell' && profile.equipment === 'gym';
   const templates: [string, string, string, Template][] = barbell ? (profile.days === 4
@@ -48,16 +51,28 @@ export function buildPlan(profile: Profile, week: number): PlanSlot[] {
     }),
   }));
 }
+export function buildPlan(profile: Profile, week: number): PlanSlot[] {
+  const p = phase(week); const introductory = week <= 4 || [8, 12, 16, 24].includes(week);
+  return buildBasePlan(profile, week).map(slot => {
+    const custom = profile.customPlans?.[planKey(profile, slot.id)];
+    if (!custom?.length) return slot;
+    const exercises = custom.flatMap(row => {
+      const exercise = getExercise(row.exerciseId);
+      if (!exercise || ['cardio', 'timed'].includes(exercise.load) || (profile.equipment === 'home' && !['dumbbell', 'bodyweight'].includes(exercise.equipment))) return [];
+      return [{ exercise, sets: Math.min(row.sets, introductory ? p.sets : 6, profile.minutes === 30 ? 2 : 6), reps: row.reps, rir: Math.max(row.rir, p.rir), rest: row.rest }];
+    }).slice(0, profile.minutes === 30 ? 4 : 12);
+    return exercises.length ? { ...slot, exercises } : slot;
+  });
+}
 export interface Progression { status: 'stop' | 'reduce' | 'hold' | 'increase'; title: string; detail: string; nextWeight: number | null }
-export function progression(exerciseId: string, history: Session[], target: Prescription, readiness: Pick<CheckIn, 'pain' | 'fatigue' | 'sleep' | 'symptoms'> | undefined, increment = 1): Progression {
+export function progression(exerciseId: string, history: Session[], target: Prescription, readiness: Pick<CheckIn, 'pain' | 'fatigue' | 'sleep' | 'symptoms'> | undefined, increment = 1, today = koreaDay()): Progression {
   const base = { nextWeight: null };
   if (readiness?.symptoms) return { ...base, status: 'stop', title: '운동을 중단하세요', detail: '흉통·실신 느낌·심한 호흡곤란·평소와 다른 심계항진이 있으면 운동을 중단하고 적절한 진료를 받으세요. 심하거나 지속되면 응급 도움을 요청하세요.' };
   if ((readiness?.pain ?? 0) >= 4) return { ...base, status: 'stop', title: '통증이 있는 동작은 중단', detail: '중량을 올리지 마세요. 통증 원인은 이 앱으로 판단할 수 없습니다. 통증 없는 대안과 전문가 평가를 확인하세요.' };
   if ((readiness?.fatigue ?? 0) >= 4 || (readiness?.sleep !== null && readiness?.sleep !== undefined && readiness.sleep < 5)) return { ...base, status: 'reduce', title: '오늘은 세트를 줄여 주세요', detail: '세트를 약 30–50% 줄이고 RIR 3–4 정도로 여유를 두세요. 이는 보수적 운영 규칙이며 의학적 판단이 아닙니다.' };
   if ((readiness?.pain ?? 0) > 0) return { ...base, status: 'hold', title: '증량을 보류하세요', detail: '통증 없는 가동 범위와 대체 동작을 먼저 확인하세요. 통증을 참고 반복하지 마세요.' };
   if (!readiness || readiness.pain === null || readiness.fatigue === null || readiness.sleep === null) return { ...base, status: 'hold', title: '오늘의 회복 상태를 확인하세요', detail: '누락된 통증·피로·수면을 정상으로 가정하지 않습니다. 오늘 상태를 입력하기 전에는 증량을 제안하지 않습니다.' };
-  const today = koreaDay();
-  const exposures = history.filter(session => session.date >= addDays(today, -28) && session.date <= today).sort((a, b) => b.startedAt.localeCompare(a.startedAt)).flatMap(session => {
+  const exposures = history.filter(session => session.date >= addDays(today, -27) && session.date <= today).sort((a, b) => b.startedAt.localeCompare(a.startedAt)).flatMap(session => {
     const sets = session.sets.filter(set => set.exerciseId === exerciseId && set.exercise === target.exercise.name && isWorkSet(set));
     return sets.length ? [sets] : [];
   });

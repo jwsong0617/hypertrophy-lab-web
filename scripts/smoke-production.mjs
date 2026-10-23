@@ -29,15 +29,20 @@ try {
       if (attempt >= 5 || ![404, 502, 503].includes(response?.status())) throw new Error(`Live site returned HTTP ${response?.status()}`);
       await new Promise(resolve => setTimeout(resolve, 5000));
     }
-    await expect(page.getByText('당신의 기록에서 시작하세요.')).toBeVisible();
-    const routes = ['overview', 'history', 'diagnosis', 'program', 'log', 'nutrition', 'research', 'settings'];
+    await expect(page.getByText('Strong 기록에서 다음 계획을 만드세요.')).toBeVisible();
+    const routes = ['program', 'designer', 'progression', 'review', 'history', 'diagnosis', 'log', 'nutrition', 'research', 'settings'];
     for (const route of routes) {
       await page.goto(`${base.href}#/${route}`);
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow: ${route}`);
     }
-    await page.goto(`${base.href}#/program`);
+    await page.goto(`${base.href}#/designer`);
     await page.getByRole('button', { name: '3대·OHP 중심', exact: true }).click();
+    await page.getByLabel('1번 세트', { exact: true }).fill('4');
+    await page.getByRole('button', { name: '이 슬롯 설계 저장', exact: true }).click();
+    await page.goto(`${base.href}#/program`);
+    await page.getByLabel('미리보기 주차', { exact: true }).selectOption('6');
+    await expect(page.locator('.program-table tbody tr').first().locator('td').nth(1)).toHaveText('4');
     await expect(page.locator('.program-table')).toContainText('바벨 스쿼트');
     await expect(page.locator('.program-table')).toContainText('바벨 벤치 프레스');
     await page.locator('.slot-tabs>button').nth(1).click();
@@ -66,10 +71,17 @@ try {
       await page.reload(); await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       await expect.poll(count).toBe(2); report.persistence = true;
       await page.goto(`${base.href}#/program`);
-      await expect(page.getByRole('button', { name: '3대·OHP 중심', exact: true })).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.locator('.program-table')).toContainText('바벨 스쿼트');
+      await page.getByLabel('미리보기 주차', { exact: true }).selectOption('6');
+      await expect(page.locator('.program-table tbody tr').first().locator('td').nth(1)).toHaveText('4');
+      await page.goto(`${base.href}#/review`);
+      await page.getByLabel('결정 이유와 적용할 변경', { exact: true }).fill('Synthetic smoke verification: keep the plan');
+      await page.getByRole('button', { name: '주간 검토 저장', exact: true }).click();
+      await expect(page.getByText('주간 검토를 저장했습니다. 프로그램은 설계 화면에서 직접 적용하세요.', { exact: true })).toBeVisible();
+      await page.goto(`${base.href}#/program`);
       await page.waitForFunction(() => !!navigator.serviceWorker.controller, undefined, { timeout: 30000 });
       await context.setOffline(true); await page.reload();
-      await expect(page.getByRole('heading', { name: '내 일상에 맞는 훈련', exact: true })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '내 프로그램', exact: true })).toBeVisible();
       report.offline = true; await context.setOffline(false);
     }
     assert.deepEqual(errors, [], 'Browser runtime errors');
@@ -80,5 +92,5 @@ try {
   }
   await writeFile(`${output}/result.json`, `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify(report, null, 2));
-  if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, `Live HTTPS verification passed: ${base.href}\n\nDesktop and mobile: all 8 routes, barbell plan, synthetic CSV import, local persistence, offline app. No runtime errors, external requests, or data uploads.\n`);
+  if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, `Live HTTPS verification passed: ${base.href}\n\nDesktop and mobile: all 10 routes, program design edits, barbell plan, weekly review, synthetic CSV import, local persistence, offline app. No runtime errors, external requests, or data uploads.\n`);
 } finally { await browser.close(); }

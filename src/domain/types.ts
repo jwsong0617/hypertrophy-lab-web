@@ -24,6 +24,8 @@ export interface ImportAudit {
   issues: ImportIssue[]; delimiter: string;
 }
 export interface ImportResult { sessions: Session[]; audit: ImportAudit }
+export interface PlannedExercise { exerciseId: string; sets: number; reps: [number, number]; rir: number; rest: number }
+export interface WeeklyReview { week: string; action: 'keep' | 'reduce' | 'change'; note: string; recordedAt: string }
 export interface Profile {
   weight: number | null; height: number | null; waist: number | null;
   days: 2 | 3 | 4; minutes: 30 | 60; startDate: string; increment: number;
@@ -31,6 +33,8 @@ export interface Profile {
   equipment: 'gym' | 'home';
   programStyle?: 'supported' | 'barbell';
   includeCalves?: boolean; includeHipThrust?: boolean;
+  customPlans?: Record<string, PlannedExercise[]>;
+  recordBindings?: Record<string, string>;
 }
 export interface CheckIn {
   id: string; date: string; weight: number | null; waist: number | null;
@@ -40,8 +44,9 @@ export interface CheckIn {
 export interface AppData {
   schemaVersion: 1; sessions: Session[]; checkIns: CheckIn[]; profile: Profile;
   nextSlot: number; importedAt: string | null; lastAudit: ImportAudit | null;
+  reviews?: WeeklyReview[];
 }
-export type PageId = 'overview' | 'history' | 'diagnosis' | 'program' | 'log' | 'nutrition' | 'research' | 'settings';
+export type PageId = 'overview' | 'history' | 'diagnosis' | 'program' | 'designer' | 'progression' | 'review' | 'log' | 'nutrition' | 'research' | 'settings';
 export const MUSCLES: Record<Muscle, string> = {
   chest: '가슴', back: '등', quads: '대퇴사두', hamstrings: '햄스트링', glutes: '둔근',
   frontDelts: '전면 어깨', sideDelts: '측면 어깨', rearDelts: '후면 어깨',
