@@ -55,7 +55,15 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - name: Prepare production browser
+        shell: bash
+        run: |
+          if task_chrome_path=$(command -v google-chrome); then
+            "$task_chrome_path" --version
+            echo "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=$task_chrome_path" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
       - name: Desktop, mobile, CSV, local persistence and offline
         run: node scripts/smoke-production.mjs
         env:

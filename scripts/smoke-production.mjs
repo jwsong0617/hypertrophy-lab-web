@@ -8,7 +8,7 @@ assert.equal(base.protocol, 'https:', 'Production smoke requires HTTPS');
 assert.ok(base.pathname.endsWith('/'), 'The deployment URL must end in /');
 const output = 'test-results/production-smoke';
 await mkdir(output, { recursive: true });
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH });
 const report = { url: base.href, checkedAt: new Date().toISOString(), viewports: [], syntheticImport: false, persistence: false, barbell: false, offline: false };
 try {
   for (const mobile of [false, true]) {

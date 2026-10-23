@@ -19,5 +19,13 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run audit:public
-      - run: npx playwright install --with-deps chromium
+      - name: Prepare browser
+        shell: bash
+        run: |
+          if task_chrome_path=$(command -v google-chrome); then
+            "$task_chrome_path" --version
+            echo "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=$task_chrome_path" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
       - run: npm run test:e2e

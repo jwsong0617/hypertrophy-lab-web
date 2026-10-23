@@ -2,6 +2,8 @@
 
 Node 24, npm 및 lockfile을 사용합니다.
 
+GitHub 실행 환경에서는 사전 설치된 Google Chrome이 있으면 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`로 재사용하고, 없으면 Playwright Chromium과 시스템 의존성을 설치합니다. 같은 테스트와 검증을 실행하며 브라우저 다운로드 지연 때문에 검사를 생략하지 않습니다.
+
 ```bash
 npm ci
 npm run dev
