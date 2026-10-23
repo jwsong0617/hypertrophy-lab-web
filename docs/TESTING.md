@@ -1,0 +1,34 @@
+# 개발과 검증
+
+Node 24, npm 및 lockfile을 사용합니다.
+
+```bash
+npm ci
+npm run dev
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run audit:public
+npm run test:e2e
+npm run analyze -- --demo
+npm run release:prepare
+```
+
+`npm run test:e2e`는 직접 프로덕션 빌드와 미리보기 서버를 시작하며 기존 서버를 재사용하지 않습니다. 시스템 Chromium이 있으면 사용하고, 없으면 Playwright 설치 브라우저를 사용합니다. 필요하면 `npx playwright install --with-deps chromium`을 먼저 실행하세요. 시스템 경로는 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`로 지정할 수 있습니다.
+
+## 자동 검증
+
+- Vitest: CSV UTF-8/BOM/구분자/인용부호/다중 행, 휴식/W/D/유산소/시간 운동, 누락·0·음수·이상치, 보조량, 날짜와 한국 시간, 세션 중복, 스프레드시트 수식 이스케이프.
+- 집계: 실제 본세트, 직접/간접 근육, 외부 중량, e1RM 조건, 7일/주간·연도 집계, 실측 체중 평균.
+- 프로그램: 주 2/3/4회, 압축/집 대안, 바벨 구성의 전신 노출·힌지 볼륨, 카프/힙 스러스트 선택 제외, 재적응, 증량의 모든 조건, 누락 RIR·회복·통증·증상·오래된 기록의 보류.
+- 저장: IndexedDB/JSON 왕복, 새 종목 선호가 없는 이전 백업 호환, 잘못된 백업 거부, 예시/개인 분리, 빈 상태 저장.
+- Playwright: 데스크톱·모바일 8개 화면, CSV 재가져오기, 새로고침 유지, JSON 내보내기/삭제/복원, 실제 입력 세트만 기록, RIR null 보존, 타이머, 위험 증상 시 완료 비활성화, 프로그램 전환, 체중 입력 후 단백질 계산, 하위 경로와 오프라인 실행.
+
+테스트 CSV는 전부 합성 자료이며 실제 사용자의 운동 기록·신체 수치를 사용하지 않습니다. 브라우저 캡처와 trace는 `test-results/`에만 생성하며 Git과 공개 코드 staging에서 제외합니다.
+
+## 현재 검증의 한계
+
+실제 Strong CSV를 비공개 경로에서 읽고 독립적인 Python 집계와 대조했습니다. 실제 브라우저 가져오기와 이력 표시도 검증했으며 개인 수치와 결과 파일은 공개 코드에 포함하지 않습니다. 브라우저 검증은 Chromium 기반 데스크톱/모바일 viewport이며 iOS Safari 실기기 검증은 아닙니다. 개발 저장소의 원격 GitHub Actions에서도 자동 검증을 통과했습니다. 공개 Pages 사이트와 새 클라우드 작업 복원은 별도 검증입니다.
+
+현재 로컬 검증은 단위 80건과 데스크톱·모바일 브라우저 12건이 통과했습니다. 브라우저 검사에는 바벨 선택, 선택 운동 추가/제외, 새로고침 유지와 실제 바벨 세트 저장도 포함합니다. 배포 워크플로는 공개 저장소의 실제 이름으로 다시 빌드·검사하며, 배포 완료 후 반환된 URL에서 브라우저 동작을 별도로 확인해야 합니다.

@@ -1,0 +1,37 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.cache/
+__pycache__/
+*.pyc
+
+# Personal raw and derived data (unless explicitly curated for private use)
+data/**/*.csv
+data/**/*.json
+data/**/*.parquet
+data/private/unpacked/
+*.local.csv
+*.private.json
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Local analysis, browser artifacts, and public code-only staging
+reports/private/
+docs/private/
+release/
+playwright-report/
+test-results/
+*.tsbuildinfo

@@ -1,0 +1,227 @@
+{
+  "checkedOn": "2026-10-23",
+  "scope": "Targeted review, not an exhaustive systematic review",
+  "recentTitleScreening": 51,
+  "references": [
+    {
+      "doi": "10.1249/mss.0000000000003897",
+      "title": "American College of Sports Medicine Position Stand. Resistance Training Prescription for Muscle Function, Hypertrophy, and Physical Performance in Healthy Adults: An Overview of Reviews.",
+      "year": 2026,
+      "pmid": "41843416",
+      "pmcid": "PMC12965823",
+      "checkedOn": "2026-10-23",
+      "verification": "full-text",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1249%2Fmss.0000000000003897&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-025-02344-w",
+      "title": "The Resistance Training Dose Response: Meta-Regressions Exploring the Effects of Weekly Volume and Frequency on Muscle Hypertrophy and Strength Gains.",
+      "year": 2026,
+      "pmid": "41343037",
+      "pmcid": null,
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-025-02344-w&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1519/jsc.0000000000004774",
+      "title": "Efficacy of Split Versus Full-Body Resistance Training on Strength and Muscle Growth: A Systematic Review With Meta-Analysis.",
+      "year": 2024,
+      "pmid": "38595233",
+      "pmcid": null,
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1519%2Fjsc.0000000000004774&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-024-02069-2",
+      "title": "Exploring the Dose-Response Relationship Between Estimated Resistance Training Proximity to Failure, Strength Gain, and Muscle Hypertrophy: A Series of Meta-Regressions.",
+      "year": 2024,
+      "pmid": "38970765",
+      "pmcid": null,
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-024-02069-2&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1186/s13102-026-01861-z",
+      "title": "Effects of resistance training performed to repetition non-failure on exercise performance in healthy adults: a systematic review and meta-analysis.",
+      "year": 2026,
+      "pmid": "42410632",
+      "pmcid": "PMC13377779",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1186%2Fs13102-026-01861-z&resultType=core&format=json"
+    },
+    {
+      "doi": "10.3389/fspor.2024.1429789",
+      "title": "Give it a rest: a systematic review with Bayesian meta-analysis on the effect of inter-set rest interval duration on muscle hypertrophy.",
+      "year": 2024,
+      "pmid": "39205815",
+      "pmcid": "PMC11349676",
+      "checkedOn": "2026-10-23",
+      "verification": "full-text",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.3389%2Ffspor.2024.1429789&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-026-02428-1",
+      "title": "The Effects of Advanced Resistance Training Prescription Methods on Strength, Power, Hypertrophy, and Performance Adaptations in Healthy Adults: A Systematic Review and Bayesian Network Meta-analysis.",
+      "year": 2026,
+      "pmid": "41951916",
+      "pmcid": "PMC13457283",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-026-02428-1&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1186/s40798-026-01012-1",
+      "title": "Acute and Chronic Effects of Drop-Set Training: A Meta-Analysis and Systematic Review.",
+      "year": 2026,
+      "pmid": "41920484",
+      "pmcid": "PMC13043944",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1186%2Fs40798-026-01012-1&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-025-02176-8",
+      "title": "Superset Versus Traditional Resistance Training Prescriptions: A Systematic Review and Meta-analysis Exploring Acute and Chronic Effects on Mechanical, Metabolic, and Perceptual Variables.",
+      "year": 2025,
+      "pmid": "39903375",
+      "pmcid": "PMC12011898",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-025-02176-8&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1186/s40798-023-00651-y",
+      "title": "Effect of Small and Large Energy Surpluses on Strength, Muscle, and Skinfold Thickness in Resistance-Trained Individuals: A Parallel Groups Design.",
+      "year": 2023,
+      "pmid": "37914977",
+      "pmcid": "PMC10620361",
+      "checkedOn": "2026-10-23",
+      "verification": "full-text",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1186%2Fs40798-023-00651-y&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1002/jcsm.12922",
+      "title": "Systematic review and meta-analysis of protein intake to support muscle mass and function in healthy adults.",
+      "year": 2022,
+      "pmid": "35187864",
+      "pmcid": "PMC8978023",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1002%2Fjcsm.12922&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-025-02341-z",
+      "title": "The Effect of Carbohydrate Intake on Muscle Hypertrophy: A Systematic Review and Meta-analysis.",
+      "year": 2026,
+      "pmid": "41712097",
+      "pmcid": "PMC13018098",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-025-02341-z&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1519/jsc.0000000000004862",
+      "title": "The Effect of Creatine Supplementation on Resistance Training-Based Changes to Body Composition: A Systematic Review and Meta-analysis.",
+      "year": 2024,
+      "pmid": "39074168",
+      "pmcid": null,
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1519%2Fjsc.0000000000004862&resultType=core&format=json"
+    },
+    {
+      "doi": "10.14814/phy2.14660",
+      "title": "The effect of acute sleep deprivation on skeletal muscle protein synthesis and the hormonal environment.",
+      "year": 2021,
+      "pmid": "33400856",
+      "pmcid": "PMC7785053",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.14814%2Fphy2.14660&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1371/journal.pone.0088384",
+      "title": "Alcohol ingestion impairs maximal post-exercise rates of myofibrillar protein synthesis following a single bout of concurrent training.",
+      "year": 2014,
+      "pmid": "24533082",
+      "pmcid": "PMC3922864",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1371%2Fjournal.pone.0088384&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1080/02640414.2016.1210197",
+      "title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis.",
+      "year": 2017,
+      "pmid": "27433992",
+      "pmcid": null,
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1080%2F02640414.2016.1210197&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1080/02640414.2018.1555906",
+      "title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.",
+      "year": 2019,
+      "pmid": "30558493",
+      "pmcid": null,
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1080%2F02640414.2018.1555906&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-022-01784-y",
+      "title": "Influence of Resistance Training Proximity-to-Failure on Skeletal Muscle Hypertrophy: A Systematic Review with Meta-analysis.",
+      "year": 2023,
+      "pmid": "36334240",
+      "pmcid": "PMC9935748",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-022-01784-y&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1136/bjsports-2017-097608",
+      "title": "A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults.",
+      "year": 2018,
+      "pmid": "28698222",
+      "pmcid": "PMC5867436",
+      "checkedOn": "2026-10-23",
+      "verification": "full-text",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1136%2Fbjsports-2017-097608&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1186/s12970-017-0177-8",
+      "title": "International Society of Sports Nutrition Position Stand: protein and exercise.",
+      "year": 2017,
+      "pmid": "28642676",
+      "pmcid": "PMC5477153",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1186%2Fs12970-017-0177-8&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1007/s40279-021-01587-7",
+      "title": "Compatibility of Concurrent Aerobic and Strength Training for Skeletal Muscle Size and Function: An Updated Systematic Review and Meta-Analysis.",
+      "year": 2022,
+      "pmid": "34757594",
+      "pmcid": "PMC8891239",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1007%2Fs40279-021-01587-7&resultType=core&format=json"
+    },
+    {
+      "doi": "10.1186/s12970-017-0173-z",
+      "title": "International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine.",
+      "year": 2017,
+      "pmid": "28615996",
+      "pmcid": "PMC5469049",
+      "checkedOn": "2026-10-23",
+      "verification": "abstract",
+      "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1186%2Fs12970-017-0173-z&resultType=core&format=json"
+    }
+  ]
+}
