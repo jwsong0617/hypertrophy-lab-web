@@ -39,4 +39,3 @@ export function Diagnosis() {
     <Card title="현재 판단할 수 없는 것"><div className="unknown-grid">{['실제 근육량·체지방 변화', '정확한 유지 칼로리·섭취량', '미입력 RIR·실제 최대근력', '통증의 원인·운동 허용 범위'].map(item => <div key={item}><Info size={17}/><span>{item}</span><strong>미확인</strong></div>)}</div></Card>
   </>;
 }
-
