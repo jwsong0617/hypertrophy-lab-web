@@ -2,6 +2,8 @@
 
 한국어로 운동 기록을 분석하고 훈련·영양·회복을 관리하는 로컬 우선 React 앱입니다. 이 공개 코드에는 개인 CSV·건강 이력·개인 분석 결과가 포함되지 않습니다.
 
+[웹 앱 열기](https://jwsong0617.github.io/hypertrophy-lab-web/) · [앱 코드](https://github.com/jwsong0617/hypertrophy-lab-web)
+
 ## 시작
 
 Node 24에서 `npm ci`, `npm run dev`를 실행하세요. 기본 경로는 `/hypertrophy-lab/`입니다.
@@ -19,6 +21,8 @@ CSV와 개인 상태는 브라우저에서 처리·저장됩니다. 계정·클�
 ## 배포
 
 GitHub Pages Source를 GitHub Actions로 설정하고 **Deploy public app**을 수동 실행하세요. 워크플로가 실제 저장소 이름으로 Vite base를 지정하고 정적 dist만 게시합니다. 기본 수동 빌드 경로를 바꾸려면 `VITE_BASE_PATH=/<저장소 이름>/ npm run build`를 사용합니다. 비공개 개발 저장소의 이력을 이 저장소로 복사하지 마세요.
+
+게시 후에는 실제 HTTPS 주소를 데스크톱·모바일 Chromium으로 검사합니다. 8개 화면, 바벨 구성, 합성 CSV 가져오기, 로컬 저장 유지, 오프라인 실행과 데이터 업로드 요청이 없는지 확인합니다. 결과와 합성 화면 캡처는 배포 워크플로의 `production-browser-verification` 아티팩트에 보관합니다.
 
 ## 근거와 한계
 

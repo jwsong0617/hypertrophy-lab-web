@@ -26,6 +26,7 @@ npm run release:prepare
 2. Actions에서 **Deploy public app**을 수동 실행합니다.
 3. 워크플로는 공개 저장소인지 검사하고 `VITE_BASE_PATH=/<실제 저장소 이름>/`으로 빌드합니다.
 4. 업로드하는 아티팩트는 `dist/`뿐입니다. `actions/deploy-pages`가 반환한 실제 URL과 동작을 확인한 후 배포 완료로 표시하세요.
+5. 배포 뒤 `Live site browser verification` 작업이 실제 HTTPS 주소를 새 브라우저 컨텍스트로 엽니다. 데스크톱·모바일의 8개 화면, 합성 CSV·로컬 저장·바벨 선택·오프라인 실행을 검사하고 외부 요청이나 데이터 업로드가 있으면 실패합니다. 개인 CSV는 이 검사에 사용하지 않습니다.
 
 기본 로컬 base는 `/hypertrophy-lab/`입니다. 루트/커스텀 도메인 배포는 `VITE_BASE_PATH=/ npm run build`로 생성합니다. 화면 이동은 해시 라우팅이므로 정적 호스팅의 새로고침 404를 피합니다. 각 base 변경 후 해당 경로와 오프라인 캐시를 실제 확인하세요.
 
